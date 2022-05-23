@@ -340,7 +340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbec0033030c0b45b4dd4e5fb2c997b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  _camera: {fileID: 519420031}
+  minZoomSize: 0.01
+  maxZoomSize: 5
+  zoomSpeed: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +616,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

@@ -23,11 +23,11 @@ public class Painter : MonoBehaviour
     public void DrawPoint(Vector3Int position, uint size = 0)
     {
         tilemap.SetTile(position, tilePrefab);
-        for (int y = position.y - (int)size; y <= position.y + (int)size; y++)
+        for (int x = position.x - (int)size; x <= position.x + (int)size; x++)
         {
-            for (int x = position.x - (int)size; x <= position.x + (int)size; x++)
+            for (int y = position.y - (int)size; y <= position.y + (int)size; y++)
             {
-                if (Mathf.Sqrt((float)Mathf.Pow(y - position.y, 2) + (float)Mathf.Pow(x - position.x, 2)) <= size)
+                if (Mathf.Sqrt((float)Mathf.Pow(x - position.x, 2) + (float)Mathf.Pow(y - position.y, 2)) <= size)
                     tilemap.SetTile(new Vector3Int(x, y, 0), tilePrefab);
             }
         }
