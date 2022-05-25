@@ -7,8 +7,37 @@ using UnityEngine.Tilemaps;
 public class Painter : MonoBehaviour
 {
     [SerializeField] private Tilemap  tilemap;
-    [SerializeField] private TileBase tilePrefab;
-    [SerializeField] private uint     pointSize;
+    [SerializeField] private Tile     tilePrefab;
+
+    [Header("Point settings")]
+    [SerializeField] private Color pointColor;
+    [SerializeField] private uint  pointSize;
+    [SerializeField] private uint  minPointSize;
+    [SerializeField] private uint  maxPointSize;
+
+    public Color PointColor
+    {
+        get { return pointColor; }
+        set
+        {
+            pointColor = value;
+            tilePrefab.color = pointColor;
+        }
+    }
+
+    public uint PointSize
+    {
+        get { return pointSize; }
+        set
+        {
+            pointSize = (uint)Mathf.Clamp(value, minPointSize, maxPointSize);
+        }
+    }
+
+    private void Start()
+    {
+        tilePrefab.color = pointColor;
+    }
 
     private void OnMouseDrag()
     {

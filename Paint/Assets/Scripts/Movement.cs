@@ -6,10 +6,6 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [Header("Zoom")]
-    [SerializeField] private float   minZoomSize;
-    [SerializeField] private float   maxZoomSize;
-    [SerializeField] private float   zoomSpeed;
 
     private Vector3 startPos;
     private Vector2 lastMousePos;
@@ -18,8 +14,6 @@ public class Movement : MonoBehaviour
     {
         OnRightMouseDown();
         OnRightMouseDrag();
-
-        onMouseWheelScroll();
     }
 
     private void OnRightMouseDown()
@@ -39,15 +33,6 @@ public class Movement : MonoBehaviour
             Vector3 delta = newMousePos - lastMousePos;
 
             transform.position = startPos + delta;
-        }
-    }
-
-    private void onMouseWheelScroll()
-    {
-        if (Input.mouseScrollDelta.y != 0)
-        {
-            float delta = Input.GetAxis("Mouse ScrollWheel");
-            _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - delta * zoomSpeed, minZoomSize, maxZoomSize);
         }
     }
 }
