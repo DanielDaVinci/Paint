@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class Movement : MonoBehaviour
@@ -10,24 +11,35 @@ public class Movement : MonoBehaviour
     private Vector3 startPos;
     private Vector2 lastMousePos;
 
+    bool DownOnPaintSpace = false;
+
     private void Update()
     {
         OnRightMouseDown();
         OnRightMouseDrag();
+        OnRightMouseUp();
     }
 
     private void OnRightMouseDown()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
         {
+            DownOnPaintSpace = true;
+
             startPos = transform.position;
             lastMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         }
     }
 
+    private void OnRightMouseUp()
+    {
+        if (Input.GetMouseButtonUp(1))
+            DownOnPaintSpace = false;
+    }
+
     private void OnRightMouseDrag()
     {
-        if (Input.GetMouseButton(1))
+        if (DownOnPaintSpace && Input.GetMouseButton(1) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector2 newMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 delta = newMousePos - lastMousePos;
