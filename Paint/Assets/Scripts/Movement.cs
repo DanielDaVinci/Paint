@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
